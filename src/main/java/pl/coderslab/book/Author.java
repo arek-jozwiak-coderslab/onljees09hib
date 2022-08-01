@@ -3,6 +3,7 @@ package pl.coderslab.book;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "authors")
@@ -19,4 +20,5 @@ public class Author {
     private Long id;
     private String firstName;
     private String lastName;
+
 }

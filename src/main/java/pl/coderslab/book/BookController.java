@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class BookController {
 
     private final BookDao bookDao;
+    private final PublisherDao publisherDao;
 
-    public BookController(BookDao bookDao) {
+    public BookController(BookDao bookDao, PublisherDao publisherDao) {
         this.bookDao = bookDao;
+        this.publisherDao = publisherDao;
     }
 
 
@@ -22,6 +24,7 @@ public class BookController {
         bookDao.save(Book.builder().
                 title("Thinking in PHP")
                 .description("Book fo java")
+                .publisher(publisherDao.findById(1l))
                 .rating(4)
                 .build());
         return "ok";
