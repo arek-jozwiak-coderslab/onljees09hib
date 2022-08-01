@@ -5,19 +5,18 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "books")
+@Table(name = "authors")
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = {"rating", "description"})
-public class Book {
+
+public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
-    private int rating;
-    private String description;
+    private String firstName;
+    private String lastName;
 }
