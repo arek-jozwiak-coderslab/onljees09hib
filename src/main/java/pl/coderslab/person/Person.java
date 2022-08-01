@@ -5,7 +5,6 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "authors")
 @Getter
 @Setter
 @Builder
@@ -17,7 +16,10 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String firstName;
-    private String lastName;
+    private String login;
+    private String password;
+    private String email;
+    @OneToOne
+    private PersonDetails personDetails;
 
 }
