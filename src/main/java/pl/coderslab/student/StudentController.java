@@ -33,4 +33,19 @@ public class StudentController {
         model.addAttribute("student", student);
         return "student/success";
     }
+
+    @ModelAttribute("countries")
+    public List<String> countries() {
+        return Arrays.asList("Poland", "Germany", "France", "Russia", "Denmark");
+    }
+
+    @ModelAttribute("programmingSkills")
+    public List<String> programmingSkills() {
+        return Arrays.asList("java", "SQL", "REST", "git");
+    }
+
+    @ModelAttribute("hobbies")
+    public List<String> hobbies() {
+        return Arrays.asList("java","programming");
+    }
 }

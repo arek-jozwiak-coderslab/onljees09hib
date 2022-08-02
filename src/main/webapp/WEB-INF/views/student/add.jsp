@@ -7,16 +7,22 @@
 </head>
 <body>
 <form:form modelAttribute="student" cssClass="some-class">
-    <form:input path="firstName"/>
-    <form:input path="lastName"/>
+    <form:input path="firstName"/> <br/>
+    <form:input path="lastName"/> <br/>
+    <form:radiobutton path="gender" value="f"/><br/>
+    <form:radiobutton path="gender" value="m"/><br/>
+    <form:select path="country"><br/>
+        <form:options items="${countries}" />
+    </form:select>
+    <form:textarea path="notes"/><br/>
+    <form:checkbox path="mailingList"/><br/>
+    <form:select path="programmingSkills" multiple="true"><br/>
+        <form:options items="${programmingSkills}" />
+    </form:select> <br/>
+    <form:checkboxes path="hobbies" items="${hobbies}"/> <br/>
     <input type="submit"/>
 </form:form>
 
 
-<form method="post" class="form">
-    <input type="text" name="firstName"/>
-    <input type="text" name="lastName"/>
-    <input type="submit"/>
-</form>
 </body>
 </html>
