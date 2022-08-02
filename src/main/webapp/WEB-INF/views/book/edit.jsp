@@ -6,9 +6,9 @@
     <title>Title</title>
 </head>
 <body>
-
+<h3>Update book</h3>
 <%--@elvariable id="book" type="pl.coderslab.book.Book"--%>
-<form:form modelAttribute="book" cssClass="some-class">
+<form:form modelAttribute="book" cssClass="some-class" action="/book-form/update">
     <%@include file="_form.jsp" %>
     <input type="submit"/>
 </form:form>
