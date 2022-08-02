@@ -6,6 +6,8 @@
     <title>Title</title>
 </head>
 <body>
+
+<%--@elvariable id="book" type="pl.coderslab.book.Book"--%>
 <form:form modelAttribute="book" cssClass="some-class">
     <form:hidden path="id"/>
     <form:input path="title"/>
