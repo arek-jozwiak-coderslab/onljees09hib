@@ -43,6 +43,19 @@ public class BookController {
         return "ok";
     }
 
+    @GetMapping("/test-second")
+    @ResponseBody
+    public String testSecond() {
+        bookRepository.findByAuthorsContains(authorDao.findById(1l))
+                .forEach(b -> System.out.println(b.getId()));
+        System.out.println("-------");
+        Book firstByCategoryOrderByTitle = bookRepository.findFirstByCategoryOrderByTitle(categoryRepository.getOne(1l));
+        System.out.println(firstByCategoryOrderByTitle.getId());
+
+        System.out.println("-------");
+        return "ok";
+    }
+
 
     @GetMapping("/save")
     @ResponseBody

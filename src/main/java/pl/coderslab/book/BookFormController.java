@@ -16,11 +16,13 @@ public class BookFormController {
     private final PublisherDao publisherDao;
     private final BookDao bookDao;
     private final AuthorDao authorDao;
+    private final CategoryRepository categoryRepository;
 
-    public BookFormController(PublisherDao publisherDao, BookDao bookDao, AuthorDao authorDao) {
+    public BookFormController(PublisherDao publisherDao, BookDao bookDao, AuthorDao authorDao, CategoryRepository categoryRepository) {
         this.publisherDao = publisherDao;
         this.bookDao = bookDao;
         this.authorDao = authorDao;
+        this.categoryRepository = categoryRepository;
     }
 
     @GetMapping("/list")
@@ -33,6 +35,7 @@ public class BookFormController {
     public String add(Model model) {
         model.addAttribute("publishers", publisherDao.findAll());
         model.addAttribute("authors", authorDao.findAll());
+        model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("book", new Book());
         return "book/add";
     }
@@ -42,6 +45,7 @@ public class BookFormController {
         if(result.hasErrors()){
             model.addAttribute("publishers", publisherDao.findAll());
             model.addAttribute("authors", authorDao.findAll());
+            model.addAttribute("categories", categoryRepository.findAll());
             return "book/add";
         }
         bookDao.save(book);
@@ -64,6 +68,7 @@ public class BookFormController {
     public String edit(Model model, @PathVariable long id) {
         model.addAttribute("publishers", publisherDao.findAll());
         model.addAttribute("authors", authorDao.findAll());
+        model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("book", bookDao.findById(id));
         return "book/edit";
     }

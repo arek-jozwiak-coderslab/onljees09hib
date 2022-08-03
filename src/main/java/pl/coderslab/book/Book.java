@@ -27,10 +27,8 @@ public class Book {
     @Size(max = 600)
     private String description;
     @ManyToOne
-    @NotNull
     private Publisher publisher;
-    @NotNull
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Author> authors;
     @ManyToOne
     private Category category;
