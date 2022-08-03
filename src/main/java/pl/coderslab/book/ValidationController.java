@@ -2,6 +2,7 @@ package pl.coderslab.book;
 
 import lombok.Getter;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,8 +21,7 @@ public class ValidationController {
     }
 
     @GetMapping("/validate")
-    @ResponseBody
-    public void test() {
+    public String test(Model model) {
         Book book = new Book();
         book.setTitle("22");
 
@@ -29,5 +29,7 @@ public class ValidationController {
         constraintViolations.forEach(
                 cv -> System.out.println(cv.getPropertyPath() + " : " + cv.getMessage())
         );
+        model.addAttribute("constraintViolations", constraintViolations);
+        return "/book/validate";
     }
 }
