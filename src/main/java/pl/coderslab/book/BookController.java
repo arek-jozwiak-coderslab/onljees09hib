@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/book")
@@ -15,11 +16,31 @@ public class BookController {
     private final BookDao bookDao;
     private final PublisherDao publisherDao;
     private final AuthorDao authorDao;
+    private final BookRepository bookRepository;
+    private final CategoryRepository categoryRepository;
 
-    public BookController(BookDao bookDao, PublisherDao publisherDao, AuthorDao authorDao) {
+    public BookController(BookDao bookDao, PublisherDao publisherDao, AuthorDao authorDao, BookRepository bookRepository, CategoryRepository categoryRepository) {
         this.bookDao = bookDao;
         this.publisherDao = publisherDao;
         this.authorDao = authorDao;
+        this.bookRepository = bookRepository;
+        this.categoryRepository = categoryRepository;
+    }
+
+
+    @GetMapping("/test")
+    @ResponseBody
+    public String test() {
+        bookRepository.findAllByTitle("Java")
+                .forEach(b -> System.out.println(b.getId()));
+        System.out.println("-------");
+        bookRepository.findAllByCategory(categoryRepository.getOne(1l))
+                .forEach(b -> System.out.println(b.getId()));
+
+        System.out.println("-------");
+        bookRepository.findAllByCategoryId(2l)
+                .forEach(b -> System.out.println(b.getId()));
+        return "ok";
     }
 
 
@@ -27,13 +48,16 @@ public class BookController {
     @ResponseBody
     public String save() {
 
+        Optional<Book> byId = bookRepository.findById(1l);
+
+
         Author byId1 = authorDao.findById(1l);
         Author byId2 = authorDao.findById(2l);
         List<Author> objects = new ArrayList<>();
         objects.add(byId1);
         objects.add(byId2);
 
-        bookDao.save(Book.builder().
+        bookRepository.save(Book.builder().
                 title("Thinking in PHP")
                 .description("Book fo java")
                 .publisher(publisherDao.findById(1l))
